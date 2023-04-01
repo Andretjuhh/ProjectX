@@ -29,11 +29,11 @@ public class LijstOlivierAlexander {
         return lijstVanOnderdelen;
     }
 
-    public ArrayList<Onderdeel> zoekInLijst(String optie) {
-        ArrayList<Onderdeel> olivier = new ArrayList<>();
+    public ArrayList<String> zoekInLijst(String optie) {
+        ArrayList<String> olivier = new ArrayList<>();
         for (Onderdeel onderdeel : lijstVanOnderdelen) {
             if (onderdeel.getNaam().equals(optie)) {
-                olivier.add(onderdeel);
+                olivier.add(onderdeel.getNaam());
             }
         }
         System.out.println(olivier);

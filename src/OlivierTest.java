@@ -1,20 +1,30 @@
+import java.util.Scanner;
+
 public class OlivierTest {
+    LijstOlivierAlexander lijst = new LijstOlivierAlexander();
+    static Scanner scanner = new Scanner(System.in);
+
+    static Onderdeel onderdeel1 = new Onderdeel("Onderdeel 1", 12.50, true);
+    static Onderdeel onderdeel2 = new Onderdeel("Onderdeel 2", 20.50, false);
+    static Onderdeel onderdeel3 = new Onderdeel("Onderdeel 3", 18.50, true);
+
     public static void main(String[] args) {
-        LijstOlivierAlexander lijst = new LijstOlivierAlexander();
-        lijst.maakOnderdelenLijst();
 
-        Onderdeel onderdeel1 = new Onderdeel("Onderdeel 1", 12.50, true);
-        Onderdeel onderdeel2 = new Onderdeel("Onderdeel 2", 20.50, false);
-        Onderdeel onderdeel3 = new Onderdeel("Onderdeel 3", 18.50, true);
+        System.out.println("Kies hier een onderdeel:");
+        System.out.println("[1] " + onderdeel1.getNaam());
+        System.out.println("[2] " + onderdeel2.getNaam());
+        System.out.println("[3] " + onderdeel3.getNaam());
 
-        lijst.onderdeelToevoegen(onderdeel1);
-        lijst.onderdeelToevoegen(onderdeel2);
-        lijst.onderdeelToevoegen(onderdeel3);
+        int antwoord1 = scanner.nextInt();
 
-        lijst.onderdeelVerwijderen(onderdeel2);
+        if (antwoord1 == 1) {
+            System.out.println("U koos " + onderdeel1.getNaam() + ".");
+        } else if (antwoord1 == 2) {
+            System.out.println("U koos " + onderdeel2.getNaam() + ".");
+        } else if (antwoord1 == 3) {
+            System.out.println("U koos " + onderdeel3.getNaam() + ".");
+        }
 
-        lijst.getLijstVanOnderdelen();
-
-        lijst.zoekInLijst("Onderdeel 1");
+        scanner.close();
     }
 }
