@@ -1,9 +1,9 @@
 public class Onderdeel {
-    private String naam;
+    private  String naam;
     private double prijs;
-    private boolean millieuvriendelijk;
+    private double millieuvriendelijk;
 
-    Onderdeel(String naam, double prijs, boolean millieuvriendelijk) {
+    Onderdeel(String naam, double prijs, double millieuvriendelijk) {
         this.naam = naam;
         this.prijs = prijs;
         this.millieuvriendelijk = millieuvriendelijk;
@@ -17,11 +17,11 @@ public class Onderdeel {
         this.prijs = prijs;
     }
 
-    public void setMillieuvriendelijk(boolean millieuvriendelijk) {
+    public void setMillieuvriendelijk(double millieuvriendelijk) {
         this.millieuvriendelijk = millieuvriendelijk;
     }
 
-    public String getNaam() {
+    public  String getNaam() {
         return naam;
     }
 
@@ -29,7 +29,7 @@ public class Onderdeel {
         return prijs;
     }
 
-    public boolean getMillieuvriendelijk() {
+    public double getMillieuvriendelijk() {
         return millieuvriendelijk;
     }
 }
