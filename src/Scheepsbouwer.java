@@ -51,5 +51,13 @@ public class Scheepsbouwer {
         this.offertes = offertes;
     }
 
+    public void addOfferte(Offerte offerte) {
+        offertes.add(offerte);
+    }
+
+    public void removeOfferte(Offerte offerte) {
+        offertes.remove(offerte);
+    }
+
 
 }

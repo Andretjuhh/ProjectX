@@ -44,7 +44,13 @@ public abstract class Klant {
         this.offertes = offertes;
     }
 
-    // Offerte methodes TBI
+    public void addOfferte(Offerte offerte) {
+        offertes.add(offerte);
+    }
+
+    public void removeOfferte(Offerte offerte) {
+        offertes.remove(offerte);
+    }
     
     // Korting functie
     static public double berekenKorting(int korting) {

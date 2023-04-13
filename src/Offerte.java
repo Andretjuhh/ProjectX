@@ -9,6 +9,7 @@ public class Offerte {
     private String status;
 
     public Offerte(String datum, Klant klant, Scheepsbouwer scheepsbouwer, Boot boot) {
+        offerteNummer = ((int) (Math.random() * 100000));
         this.datum = datum;
         this.klant = klant;
         this.scheepsbouwer = scheepsbouwer;
@@ -55,7 +56,7 @@ public class Offerte {
     }
 
     public String printHead() {
-        return "Offerte " + offerteNummer + "Datum: " + datum;
+        return "Offerte " + offerteNummer + " Datum: " + datum + " Status: " + status;
     }
 
     public String print() {

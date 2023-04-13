@@ -60,6 +60,9 @@ class Boot {
     public ArrayList<Onderdeel> getExtraOpties() {
         return extraOpties;
     }
+    public static ArrayList<Boot> getBootIDs() {
+        return bootIDs;
+    }
 
     public void setBootID(int bootID) {
         this.bootID = bootID;
@@ -113,10 +116,16 @@ class Boot {
         return totaalPrijs;
     }
 
-    public String print() {
+    public String printBoot() {
         String result = "BootID: " + bootID + "\n";
         result += "Grootte in M²: " + grootte + " prijs per M²: " + prijsM2 + "\n";
         result += "Prijs van de boot: " + grootte * prijsM2 + "\n";
+
+        return result;
+    }
+
+    public String print() {
+        String result = printBoot();
 
         result += "\n" + "Onderdelen:\n";
         result += navigatie.printOnderdeel();
