@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class UI {
     static private Scanner input = new Scanner(System.in);
+    static private Scheepsbouwer actieveScheepsbouwer;
+    static private Klant actieveKlant;
 
     // Methode om het programma te starten
     static private void startUp() {
@@ -27,11 +29,123 @@ public class UI {
     static private void inloggen() {
         System.out.println("Als u al een account heeft voer uw email in om in te loggen");
         System.out.print("email: ");
-        String emailInlog = input.nextLine();
+        String emailInlog = input.next();
+
+        // Check door alle scheepsbouwers of de email bekend is.
+        for(Scheepsbouwer inlog : Scheepsbouwer.getAllScheepsbouwers()) {
+            if(inlog.getEmail().equals(emailInlog)) {
+                actieveScheepsbouwer = inlog;
+                clearConsole();
+                scheepsbouwerUI();
+            }
+        }
+
+        // Check door alle klanten of de email bekend is.
+        for(Klant inlog : Klant.getAllKlanten()) {
+            if(inlog.getEmail().equals(emailInlog)) {
+                actieveKlant = inlog;
+                clearConsole();
+                klantUI();
+            }
+        }
+
+        clearConsole();
+        System.out.println("Het emailadres is niet gevonden in ons systeem. Probeer opnieuw");
+        inloggen();
+
     }
 
     static private void aanmelden() {
-        System.out.println("TBI: aanmeld platform");
+        System.out.println("Leuk dat u gebruik gaat maken van ShipFlex!");
+        System.out.println("Bent u een scheepsbouwer toets 1, voor klanten toets 2.");
+        int keuze = inputInt();
+        if(keuze == 1) {
+            clearConsole();
+            nieuwScheepsbouwer();
+        } else if(keuze == 2) {
+            clearConsole();
+            nieuwKlant();
+        } else {
+            buitenBereik();
+            aanmelden();
+        }
+    }
+
+    static private void nieuwScheepsbouwer() {
+        System.out.println("Voer de onderstaande informatie in om een nieuw account aan te maken:");
+        System.out.print("Voornaam: ");
+        String voornaam = input.next();
+        System.out.print("Achternaam: ");
+        String achternaam = input.next();
+        System.out.print("E-mail: ");
+        String email = input.next();
+        
+        Scheepsbouwer nieuw = new Scheepsbouwer(voornaam, achternaam, email);
+        actieveScheepsbouwer = nieuw;
+        
+        clearConsole();
+        scheepsbouwerUI();
+    }
+
+    static private void nieuwKlant() {
+        System.out.println("Voer de onderstaande informatie in om een nieuw account te maken");
+        System.out.print("email: ");
+        String email = input.next();
+        System.out.print("telefoonnummer: ");
+        int telefoonnummer = inputInt();
+
+        System.out.println("\nVoor particuliere klanten toets 1, Bent u een bedrijf toets 2, Voor overheid toets 3");
+        int keuze = inputInt();
+        switch(keuze) {
+            case 1 : nieuwParticulier(email, telefoonnummer);
+            break;
+            
+            case 2 : nieuwBedrijf(email, telefoonnummer);
+            break;
+
+            case 3 : nieuwOverheid(email, telefoonnummer);
+            break;
+            
+            default : buitenBereik(); nieuwKlant();
+        }
+    }
+
+    static private void nieuwParticulier(String email, int telefoonnummer) {
+        System.out.println("Voer verder de onderstaande informatie nog in om uw account compleet te maken");
+        System.out.print("Voornaam: ");
+        String voornaam = input.next();
+        System.out.print("Achternaam: ");
+        String achternaam = input.next();
+
+        Particulier nieuw = new Particulier(email, telefoonnummer, voornaam, achternaam);
+        actieveKlant = nieuw;
+
+        clearConsole();
+        klantUI();
+    }
+
+    static private void nieuwBedrijf(String email, int telefoonnummer) {
+        System.out.println("Voer verder de onderstaande informatie nog in om uw account compleet te maken");
+        System.out.print("Bedrijfsnaam: ");
+        String bedrijfsNaam = input.next();
+
+        Bedrijf nieuw = new Bedrijf(email, telefoonnummer, bedrijfsNaam);
+        actieveKlant = nieuw;
+
+        clearConsole();
+        klantUI();
+    }
+
+    static private void nieuwOverheid(String email, int telefoonnummer) {
+        System.out.println("Voer verder de onderstaande informatie nog in om uw account compleet te maken");
+        System.out.print("Instantie: ");
+        String instantie = input.next();
+
+        Overheid nieuw = new Overheid(email, telefoonnummer, instantie);
+        actieveKlant = nieuw;
+
+        clearConsole();
+        klantUI();
     }
 
     // Methode voor een scheepsbouwer om een nieuwe offerte op te stellen.
@@ -95,7 +209,7 @@ public class UI {
     
     // Keuze UI voor klanten.
     static private void klantUI() {
-        System.out.println("U bent ingelogd als klant, kies uit de volgende opties:");
+        System.out.println("U bent ingelogd als " + actieveKlant.getEmail() + ", kies uit de volgende opties:");
         System.out.println("1: Nieuw project aanmaken");
         System.out.println("2: Mijn offertes");
         System.out.println("0: Programma afsluiten");
@@ -117,7 +231,7 @@ public class UI {
 
     // Keuze menu voor scheepsbouwers.
     static private void scheepsbouwerUI() {
-        System.out.println("U bent ingelogd als scheepsbouwer, kies uit de volgende opties:");
+        System.out.println("U bent ingelogd als " + actieveScheepsbouwer.getEmail() + ", kies uit de volgende opties:");
         System.out.println("1: Nieuwe offerte opstellen");
         System.out.println("2: Lijst van offertes tonen");
         System.out.println("3: Nieuwe klanttype toevoegen");
@@ -147,6 +261,8 @@ public class UI {
 
 
     public static void main(String[] args) {
+        Scheepsbouwer nieuwBouwer = new Scheepsbouwer("Reno", "Welleman", "rwell@mail");
+        Klant nieuwKlant = new Particulier("rwelleman@mail", 061120, "Reno", "Welleman");
         startUp();
     }
 }

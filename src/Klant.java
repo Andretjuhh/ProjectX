@@ -1,24 +1,20 @@
 import java.util.ArrayList;
 
 public abstract class Klant {
-    private int ID;
-    protected String email;
-    protected int telefoonnummer;
-    // protected ArrayList<Offerte> offertes;        //lijst van offertes voor de klant
+    private static ArrayList<Klant> allKlanten = new ArrayList<Klant>(); // ArrayList om alle klanten in het systeem bij te houden
+    private String email;
+    private int telefoonnummer;
+    private ArrayList<Offerte> offertes;
 
     // constructor
     public Klant(String email, int telefoonnummer) {
-        ID = (int)(Math.random() * 100000);
         this.email = email;
         this.telefoonnummer = telefoonnummer;
-        // this.offertes = new ArrayList<Offerte>();
+        this.offertes = new ArrayList<Offerte>();
+        allKlanten.add(this);
     }
 
     // getters
-    public int getID() {
-        return ID;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -27,15 +23,15 @@ public abstract class Klant {
         return telefoonnummer;
     }
 
-    // public ArrayList<Offerte> getOffertes() {
-    //     return offertes;
-    // }
-
-    // setters
-    public void setID(int ID) {
-        this.ID = ID;
+    public ArrayList<Offerte> getOffertes() {
+        return offertes;
     }
 
+    public static ArrayList<Klant> getAllKlanten() {
+        return allKlanten;
+    }
+
+    // setters
     public void setEmail(String email) {
         this.email = email;
     }
@@ -44,9 +40,9 @@ public abstract class Klant {
         this.telefoonnummer = telefoonnummer;
     }
 
-    // public void setOffertes(ArrayList<Offerte> offertes) {
-    //     this.offertes = offertes;
-    // }
+    public void setOffertes(ArrayList<Offerte> offertes) {
+        this.offertes = offertes;
+    }
 
     // Offerte methodes TBI
     
