@@ -19,15 +19,16 @@ public class OnderdelenLijst {
    
             // Query database for boat parts
             stmt = con.createStatement();
-            rs = stmt.executeQuery("SELECT Onaam, prijs, milieu FROM onderdelen");
+            rs = stmt.executeQuery("SELECT Onaam, prijs, milieu, categorie FROM onderdelen");
    
             while (rs.next()) {
                // Fetch data from result set
                String naam = rs.getString("Onaam");
                double prijs = rs.getDouble("prijs");
-               double milieu = rs.getDouble("milieu");
+               int milieu = rs.getInt("milieu");
+               String categorie = rs.getString("categorie");
 
-               Onderdeel onderdeel = new Onderdeel(naam, prijs, milieu);
+               Onderdeel onderdeel = new Onderdeel(naam, prijs, milieu, categorie);
                lijstVanOnderdelen.add(onderdeel);
             }
         }
@@ -63,11 +64,12 @@ public class OnderdelenLijst {
             con = DriverManager.getConnection("jdbc:mysql://localhost/projectX", "root", "Ikspopdepl4");
    
             // Insert new boat part into database
-            String query = "INSERT INTO onderdelen (Onaam, prijs, milieu) VALUES (?, ?, ?)";
+            String query = "INSERT INTO onderdelen (Onaam, prijs, milieu, categorie) VALUES (?, ?, ?, ?)";
             stmt = con.prepareStatement(query);
             stmt.setString(1, onderdeel.getNaam());
             stmt.setDouble(2, onderdeel.getPrijs());
-            stmt.setDouble(3, onderdeel.getMillieuvriendelijk());
+            stmt.setInt(3, onderdeel.getMillieuvriendelijk());
+            stmt.setString(4, onderdeel.getCategorie());
             stmt.executeUpdate();
    
             System.out.println("Onderdeel is toegevoegd.");
@@ -142,7 +144,7 @@ public class OnderdelenLijst {
          // Establish connection to MySQL database
          Class.forName("com.mysql.jdbc.Driver");
          con = DriverManager.getConnection("jdbc:mysql://localhost/projectX", "root", "Ikspopdepl4");
-         String query = "SELECT Onaam, prijs, milieu FROM onderdelen WHERE Onaam LIKE ?";
+         String query = "SELECT Onaam, prijs, milieu, categorie FROM onderdelen WHERE Onaam LIKE ?";
          stmt = con.prepareStatement(query);
          stmt.setString(1, "%" + optie + "%");
          rs = stmt.executeQuery();
@@ -151,8 +153,9 @@ public class OnderdelenLijst {
             // Create a new BoatPart object with the values retrieved from the database
             String Onaam = rs.getString("Onaam");
             double prijs = rs.getDouble("prijs");
-            double millieuvriendelijk = rs.getDouble("milieu");
-            Onderdeel onderdeel = new Onderdeel(Onaam, prijs, millieuvriendelijk);
+            int millieuvriendelijk = rs.getInt("milieu");
+            String categorie = rs.getString("categorie");
+            Onderdeel onderdeel = new Onderdeel(Onaam, prijs, millieuvriendelijk, categorie);
             lijstVanOnderdelen.add(onderdeel);
          }
       }
@@ -169,4 +172,44 @@ public class OnderdelenLijst {
       }
       return lijstVanOnderdelen;
    }
+
+   public static ArrayList<Onderdeel> SorteerCategorie(String optie) {
+      Connection con = null;
+      PreparedStatement stmt = null;
+      ResultSet rs = null;
+      maakOnderdelenLijst();
+
+      
+      try {
+       // Establish connection to MySQL database
+       Class.forName("com.mysql.jdbc.Driver");
+       con = DriverManager.getConnection("jdbc:mysql://localhost/projectX", "root", "Ikspopdepl4");
+       String query = "SELECT Onaam, prijs, milieu, categorie FROM onderdelen WHERE categorie = ?";
+       stmt = con.prepareStatement(query);
+       stmt.setString(1, optie );
+       rs = stmt.executeQuery();
+
+       while (rs.next()) {
+          // Create a new BoatPart object with the values retrieved from the database
+          String Onaam = rs.getString("Onaam");
+          double prijs = rs.getDouble("prijs");
+          int millieuvriendelijk = rs.getInt("milieu");
+          String categorie = rs.getString("categorie");
+          Onderdeel onderdeel = new Onderdeel(Onaam, prijs, millieuvriendelijk, categorie);
+          lijstVanOnderdelen.add(onderdeel);
+       }
+    }
+    catch (ClassNotFoundException | SQLException e) {
+       e.printStackTrace();
+    } finally {
+       try {
+          if (rs != null) rs.close();
+          if (stmt != null) stmt.close();
+          if (con != null) con.close();
+       } catch (SQLException e) {
+          e.printStackTrace();
+       }
+    }
+    return lijstVanOnderdelen;
+ }
 }
