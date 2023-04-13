@@ -29,7 +29,8 @@ public class Particulier extends Klant {
     }
 
     // Korting functie
-    static public double berekenKorting() {
+    @Override
+    public double berekenKorting() {
         return Klant.berekenKorting(korting);
     }
 }

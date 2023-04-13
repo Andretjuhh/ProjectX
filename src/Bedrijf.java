@@ -18,7 +18,7 @@ public class Bedrijf extends Klant {
     }
 
     // Korting functie
-    static public double berekenKorting() {
+    public double berekenKorting() {
         return Klant.berekenKorting(korting);
     }
 }

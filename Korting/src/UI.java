@@ -175,7 +175,19 @@ public class UI {
 
     // Methode voor een klant om al zijn offertes in te zien.
     static private void klantOfferteLijst() {
-        System.out.println("TBI");
+        System.out.println("Uw account heeft de volgende offertes:");
+        
+        for(Offerte offerte : actieveKlant.getOffertes()) {
+            System.out.println(offerte);
+        }
+
+        System.out.println("Om een offerte te openen kunt u het offertenummer nu intoetsen:");
+        System.out.print("Offertenummer: ");
+        int offerteNummer = inputInt();
+
+        for(Offerte offerte : actieveKlant.getOffertes()) {
+            // if(offerte.getOfferteNummer)
+        }
     }
 
     // Methode om de console leeg te maken.
