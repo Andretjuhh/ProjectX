@@ -4,7 +4,7 @@ public class UI {
     static private Scanner input = new Scanner(System.in);
 
     // Methode om het programma te starten
-    static private void start() {
+    static private void startUp() {
         clearConsole();
         System.out.println("Welkom bij ShipFlex, om van ons systeem gebruik te maken vragen wij u in te loggen.");
         System.out.println("Nog geen klant? Maak dan een account aan.");
@@ -20,17 +20,14 @@ public class UI {
             case 2: clearConsole(); aanmelden();
             break;
 
-            default: buitenBereik(); start();
+            default: buitenBereik(); startUp();
         }
     }
 
     static private void inloggen() {
-        System.out.println("TBI inlog platform");
-        System.out.println("1 voor scheepsbouwer, 2 voor klant");
-        int keuze = inputInt();
-        if(keuze == 1) {clearConsole(); scheepsbouwerUI();}
-        else if(keuze == 2) {clearConsole(); klantUI();}
-        else {buitenBereik(); inloggen();}
+        System.out.println("Als u al een account heeft voer uw email in om in te loggen");
+        System.out.print("email: ");
+        String emailInlog = input.nextLine();
     }
 
     static private void aanmelden() {
@@ -150,6 +147,6 @@ public class UI {
 
 
     public static void main(String[] args) {
-        start();
+        startUp();
     }
 }
