@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class OnderdelenLijst {
+public class DBConnection {
     private static ArrayList<Onderdeel> lijstVanOnderdelen;
 
     public static ArrayList<Onderdeel> getOnderdelen(){

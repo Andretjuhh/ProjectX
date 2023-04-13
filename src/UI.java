@@ -7,7 +7,7 @@ public class UI {
     static private Klant actieveKlant;
 
     // Methode om het programma te starten
-    static private void startUp() {
+    static public void startUp() {
         clearConsole();
         System.out.println("Welkom bij ShipFlex, om van ons systeem gebruik te maken vragen wij u in te loggen.");
         System.out.println("Nog geen klant? Maak dan een account aan.");
@@ -454,12 +454,5 @@ public class UI {
 
             default: buitenBereik(); scheepsbouwerUI();
         }
-    }
-
-
-    public static void main(String[] args) {
-        Particulier p1 = new Particulier("test@mail.nl", 012345, "Makker", "Maak");
-        Scheepsbouwer sb = new Scheepsbouwer("Reno", "Welleman", "mijnmail@mail.nl");
-        startUp();
     }
 }
