@@ -6,7 +6,10 @@ public class Onderdeel {
     private double prijs;
     private int millieuvriendelijk;
     private String categorie;
+    private int millieuvriendelijk;
+    private String categorie;
 
+    Onderdeel(String naam, double prijs, int millieuvriendelijk, String categorie) {
     Onderdeel(String naam, double prijs, int millieuvriendelijk, String categorie) {
         this.naam = naam;
         this.prijs = prijs;
@@ -45,7 +48,21 @@ public class Onderdeel {
         return onderdelenCat;
     }
 
-    public String getNaam() {
+    public static ArrayList<Onderdeel> getAllOnderdelen() {
+        return allOnderdelen;
+    }
+
+    public static ArrayList<Onderdeel> getAllOnderdelenCategorie(String categorie) {
+        ArrayList<Onderdeel> onderdelenCat = new ArrayList<Onderdeel>();
+        for(Onderdeel onderdeel : allOnderdelen) {
+            if(onderdeel.categorie == categorie) {
+                onderdelenCat.add(onderdeel);
+            }
+        }
+        return onderdelenCat;
+    }
+
+    public  String getNaam() {
         return naam;
     }
 
@@ -57,6 +74,7 @@ public class Onderdeel {
         return prijs;
     }
 
+    public int getMillieuvriendelijk() {
     public int getMillieuvriendelijk() {
         return millieuvriendelijk;
     }
