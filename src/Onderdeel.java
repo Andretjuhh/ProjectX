@@ -1,9 +1,9 @@
 public class Onderdeel {
     private String naam;
     private double prijs;
-    private boolean millieuvriendelijk;
+    private int millieuvriendelijk;
 
-    Onderdeel(String naam, double prijs, boolean millieuvriendelijk) {
+    Onderdeel(String naam, double prijs, int millieuvriendelijk) {
         this.naam = naam;
         this.prijs = prijs;
         this.millieuvriendelijk = millieuvriendelijk;
@@ -17,7 +17,7 @@ public class Onderdeel {
         this.prijs = prijs;
     }
 
-    public void setMillieuvriendelijk(boolean millieuvriendelijk) {
+    public void setMillieuvriendelijk(int millieuvriendelijk) {
         this.millieuvriendelijk = millieuvriendelijk;
     }
 
@@ -29,7 +29,15 @@ public class Onderdeel {
         return prijs;
     }
 
-    public boolean getMillieuvriendelijk() {
+    public int getMillieuvriendelijk() {
         return millieuvriendelijk;
+    }
+
+    public void printOnderdeel() {
+        String prijsInDouble = String.format("%.2f", getPrijs());
+        String s = "Onderdeel " + getNaam() + " kost €" + prijsInDouble + " en hierop zit " + getMillieuvriendelijk()
+                + "% korting.";
+        System.out.println(s);
+        System.out.println();
     }
 }
