@@ -33,11 +33,11 @@ public class Onderdeel {
         return millieuvriendelijk;
     }
 
-    public void printOnderdeel() {
+    public String printOnderdeel() {
         String prijsInDouble = String.format("%.2f", getPrijs());
         String s = "Onderdeel " + getNaam() + " kost €" + prijsInDouble + " en hierop zit " + getMillieuvriendelijk()
-                + "% korting.";
-        System.out.println(s);
-        System.out.println();
+                + "% korting.\n";
+        
+        return s;
     }
 }
