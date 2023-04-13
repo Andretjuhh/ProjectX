@@ -65,6 +65,8 @@ public class Offerte {
         result += "Scheepsbouwer: " + scheepsbouwer.getVoornaam() + " " + scheepsbouwer.getAchternaam() + "\n";
         result += boot.print();
 
+        result += "Totaalprijs: " + totaalPrijs();
+
         return result;
     }
 

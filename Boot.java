@@ -113,6 +113,22 @@ class Boot {
         return totaalPrijs;
     }
 
+    public String print() {
+        String result = "BootID: " + bootID + "\n";
+        result += "Grootte in M²: " + grootte + " prijs per M²: " + prijsM2 + "\n";
+        result += "Prijs van de boot: " + grootte * prijsM2 + "\n";
+
+        result += "\n" + "Onderdelen:\n";
+        result += navigatie.printOnderdeel();
+        result += motor.printOnderdeel();
+        result += roer.printOnderdeel();
+        result += tank.printOnderdeel();
+
+        for(Onderdeel onderdeel : extraOpties) {onderdeel.printOnderdeel();}
+
+        return result;
+    }
+
     // Hier komt later nog een uitgewerkte methode
 
     public ArrayList<Onderdeel> filterOnderdeel(String categorie, ArrayList<Onderdeel> lijst) {
