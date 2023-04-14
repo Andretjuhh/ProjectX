@@ -312,14 +312,31 @@ public class UI {
     // Methode voor een scheepsbouwer om een nieuwe onderdeel toe te voegen.
     static private void scheepsbouwerOnderdeel() {
         System.out.println("Voer hieronder de details voor een nieuw onderdeel in:");
+        
+        System.out.println("Wat is de categorie van het onderdeel?");
+        System.out.println("1: Navigatie");
+        System.out.println("2: Motor");
+        System.out.println("3: Roer");
+        System.out.println("4: Tank");
+        System.out.println("5: Overig");
+
+        String categorie = null;
+        int categorieKeuze = inputInt();
+
+        try {
+            categorie = Onderdeel.getCategorieën()[categorieKeuze - 1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            buitenBereik(); scheepsbouwerOnderdeel(); return;
+        }
+        
         System.out.print("Naam: ");
         String naam = input.next();
+        
         System.out.print("Prijs: ");
         double prijs = inputDouble();
+        
         System.out.print("Milieu: ");
         int milieu = inputInt();
-        System.out.print("Categorie: ");
-        String categorie = input.next();
 
         Onderdeel nieuw = new Onderdeel(naam, prijs, milieu, categorie);
         DBConnection.onderdeelToevoegen(nieuw);

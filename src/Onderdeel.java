@@ -6,6 +6,7 @@ public class Onderdeel {
     private int millieuvriendelijk;
     private String categorie;
     private static ArrayList<Onderdeel> allOnderdelen = new ArrayList<Onderdeel>();
+    private static String[] categorieën = new String[]{"navigatie", "motor", "roer", "tank", "overig"};
 
     Onderdeel(String naam, double prijs, int millieuvriendelijk, String categorie) {
         this.naam = naam;
@@ -60,6 +61,10 @@ public class Onderdeel {
 
     public int getMillieuvriendelijk() {
         return millieuvriendelijk;
+    }
+
+    public static String[] getCategorieën() {
+        return categorieën;
     }
 
     public String printOnderdeel() {
