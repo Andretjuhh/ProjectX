@@ -35,7 +35,7 @@ public class DBConnection {
                String categorie = rs.getString("categorie");
 
                Onderdeel onderdeel = new Onderdeel(naam, prijs, milieu, categorie);
-               lijstVanOnderdelen.add(onderdeel);
+               // lijstVanOnderdelen.add(onderdeel);
             }
         }
         catch (ClassNotFoundException | SQLException e) {
@@ -243,7 +243,7 @@ public class DBConnection {
           String email = rs.getString("email");
 
           Bedrijf bedrijf = new Bedrijf(email, telefoon, naam);
-          lijstVanBedrijven.add(bedrijf);
+         //  lijstVanBedrijven.add(bedrijf);
        }
    }
    catch (ClassNotFoundException | SQLException e) {
@@ -361,7 +361,7 @@ public static ArrayList<Overheid> getOverheid(){
           String email = rs.getString("email");
 
           Overheid overheid = new Overheid(email, telefoon, instantie);
-          lijstVanOverheid.add(overheid);
+         //  lijstVanOverheid.add(overheid);
        }
    }
    catch (ClassNotFoundException | SQLException e) {
@@ -477,7 +477,7 @@ public static ArrayList<Particulier> getParticulier(){
           String email = rs.getString("email");
 
           Particulier particulier = new Particulier(email, telefoon, voornaam, achternaam);
-          lijstvanParticulieren.add(particulier);
+         //  lijstvanParticulieren.add(particulier);
        }
    }
    catch (ClassNotFoundException | SQLException e) {
@@ -586,7 +586,7 @@ public static ArrayList<Boot> getBoot(){
 
        // Query database for boat parts
        stmt = con.createStatement();
-       rs = stmt.executeQuery("SELECT bootnaam, grootte, prijs FROM boot");
+       rs = stmt.executeQuery("SELECT bootID, grootte, prijs FROM boot");
 
        while (rs.next()) {
           // Fetch data from result set
@@ -595,7 +595,7 @@ public static ArrayList<Boot> getBoot(){
           double prijs = rs.getDouble("prijs");
 
           Boot boot = new Boot(bootID, grootte, prijs);
-          lijstvanBoten.add(boot);
+         //  lijstvanBoten.add(boot);
        }
    }
    catch (ClassNotFoundException | SQLException e) {
@@ -709,7 +709,7 @@ public static ArrayList<Scheepsbouwer> getScheepsbouwer(){
           String email = rs.getString("email");
 
           Scheepsbouwer scheepsbouwer = new Scheepsbouwer(email, voornaam, achternaam);
-          lijsvanScheepsbouwers.add(scheepsbouwer);
+         //  lijsvanScheepsbouwers.add(scheepsbouwer);
        }
    }
    catch (ClassNotFoundException | SQLException e) {
@@ -740,11 +740,11 @@ public static void scheepsbouwerToevoegen(Scheepsbouwer scheepsbouwer) {
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Insert new boat part into database
-       String query = "INSERT INTO particulier (voornaam, achternaam, email) VALUES (?, ?, ?)";
+       String query = "INSERT INTO scheepsbouwer (voornaam, achternaam, email) VALUES (?, ?, ?)";
        stmt = con.prepareStatement(query);
        stmt.setString(1, scheepsbouwer.getVoornaam());
        stmt.setString(2, scheepsbouwer.getAchternaam());
-       stmt.setString(4, scheepsbouwer.getEmail());
+       stmt.setString(3, scheepsbouwer.getEmail());
        stmt.executeUpdate();
 
        System.out.println("Scheepsbouwer is toegevoegd.");
@@ -772,7 +772,7 @@ public static void scheepsbouwerToevoegen(Scheepsbouwer scheepsbouwer) {
     // Establish connection to MySQL database
     Class.forName("com.mysql.jdbc.Driver");
     con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
-    String query = "SELECT voornaam, achternaam, email FROM particulier WHERE achternaam LIKE ?";
+    String query = "SELECT voornaam, achternaam, email FROM scheepsbouwer WHERE achternaam LIKE ?";
     stmt = con.prepareStatement(query);
     stmt.setString(1, "%" + optie + "%");
     rs = stmt.executeQuery();

@@ -88,7 +88,7 @@ public class UI {
         
         Scheepsbouwer nieuw = new Scheepsbouwer(voornaam, achternaam, email);
         actieveScheepsbouwer = nieuw;
-        DBConnection.scheepsbouwerToevoegen();
+        DBConnection.scheepsbouwerToevoegen(nieuw);
     }
 
     static private void nieuwKlant() {
@@ -554,6 +554,7 @@ public class UI {
         DBConnection.getBedrijven();
         DBConnection.getOverheid();
         DBConnection.getParticulier();
+        DBConnection.getScheepsbouwer();
     }
     
     // Keuze UI voor klanten.
