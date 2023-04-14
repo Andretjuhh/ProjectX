@@ -15,7 +15,7 @@ public class DBConnection {
         try {
             // Establish connection to MySQL database
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/projectX", "root", "Ikspopdepl4");
+            con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
    
             // Query database for boat parts
             stmt = con.createStatement();
@@ -61,7 +61,7 @@ public class DBConnection {
         try {
             // Establish connection to MySQL database
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/projectX", "root", "Ikspopdepl4");
+            con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
    
             // Insert new boat part into database
             String query = "INSERT INTO onderdelen (Onaam, prijs, milieu, categorie) VALUES (?, ?, ?, ?)";
@@ -95,7 +95,7 @@ public class DBConnection {
         try {
            // Establish connection to MySQL database
            Class.forName("com.mysql.jdbc.Driver");
-           con = DriverManager.getConnection("jdbc:mysql://localhost/projectX", "root", "Ikspopdepl4");
+           con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
   
            // Remove boat part from database
            String query = "DELETE FROM onderdelen WHERE Onaam = ?";
@@ -143,7 +143,7 @@ public class DBConnection {
         try {
          // Establish connection to MySQL database
          Class.forName("com.mysql.jdbc.Driver");
-         con = DriverManager.getConnection("jdbc:mysql://localhost/projectX", "root", "Ikspopdepl4");
+         con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
          String query = "SELECT Onaam, prijs, milieu, categorie FROM onderdelen WHERE Onaam LIKE ?";
          stmt = con.prepareStatement(query);
          stmt.setString(1, "%" + optie + "%");
@@ -183,7 +183,7 @@ public class DBConnection {
       try {
        // Establish connection to MySQL database
        Class.forName("com.mysql.jdbc.Driver");
-       con = DriverManager.getConnection("jdbc:mysql://localhost/projectX", "root", "Ikspopdepl4");
+       con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com", "root", "Ikspopdepl4");
        String query = "SELECT Onaam, prijs, milieu, categorie FROM onderdelen WHERE categorie = ?";
        stmt = con.prepareStatement(query);
        stmt.setString(1, optie );
@@ -212,4 +212,9 @@ public class DBConnection {
     }
     return lijstVanOnderdelen;
  }
+
+
+
+
+
 }
