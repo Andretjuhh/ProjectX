@@ -14,6 +14,8 @@ public class Offerte {
         this.klant = klant;
         this.scheepsbouwer = scheepsbouwer;
         this.boot = boot;
+        klant.addOfferte(this);
+        scheepsbouwer.addOfferte(this);
         status = statussen[0];
     }
 
@@ -66,12 +68,12 @@ public class Offerte {
         result += "Scheepsbouwer: " + scheepsbouwer.getVoornaam() + " " + scheepsbouwer.getAchternaam() + "\n";
         result += boot.print();
 
-        result += "Totaalprijs: " + totaalPrijs();
+        result += String.format("Totaalprijs: %.2f", totaalPrijs());
 
         return result;
     }
 
     public double totaalPrijs() {
-        return klant.berekenKorting() * boot.berekenTotaalPrijs();
+        return (klant.berekenKorting() * boot.berekenTotaalPrijs());
     }
 }
