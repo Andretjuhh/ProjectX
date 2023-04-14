@@ -1,17 +1,18 @@
 import java.util.ArrayList;
 
 public class Onderdeel {
-    private static ArrayList<Onderdeel> allOnderdelen = new ArrayList<Onderdeel>();
     private String naam;
     private double prijs;
     private int millieuvriendelijk;
     private String categorie;
+    private static ArrayList<Onderdeel> allOnderdelen = new ArrayList<Onderdeel>();
 
     Onderdeel(String naam, double prijs, int millieuvriendelijk, String categorie) {
         this.naam = naam;
         this.prijs = prijs;
         this.millieuvriendelijk = millieuvriendelijk;
         this.categorie = categorie;
+
         allOnderdelen.add(this);
     }
 
@@ -38,7 +39,7 @@ public class Onderdeel {
     public static ArrayList<Onderdeel> getAllOnderdelenCategorie(String categorie) {
         ArrayList<Onderdeel> onderdelenCat = new ArrayList<Onderdeel>();
         for(Onderdeel onderdeel : allOnderdelen) {
-            if(onderdeel.categorie == categorie) {
+            if(onderdeel.categorie.equals(categorie)) {
                 onderdelenCat.add(onderdeel);
             }
         }

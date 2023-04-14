@@ -300,25 +300,32 @@ public class UI {
     }
 
     // Methode voor een scheepsbouwer om een nieuw type klant toe te voegen.
-    static private void scheepsbouwerNieuweKlant() {
-        System.out.println("TBI");
+    static private void scheepsbouwerNieuweBoot() {
+        System.out.println("Voer hieronder de details voor het nieuwe model boot in:");
+        System.out.print("Grootte in m: ");
+        double grootte = inputDouble();
+        System.out.print("Prijs per m²: ");
+        double prijsM2 = inputDouble();
+
+        Boot nBoot = new Boot(grootte, prijsM2);
     }
 
     // Methode voor een scheepsbouwer om een nieuwe onderdeel toe te voegen.
     static private void scheepsbouwerOnderdeel() {
         System.out.println("Voer hieronder de details voor een nieuw onderdeel in:");
-        System.out.println("Naam: ");
+        System.out.print("Naam: ");
         String naam = input.next();
-        System.out.println("Prijs: ");
+        System.out.print("Prijs: ");
         double prijs = inputDouble();
-        System.out.println("Milieu: ");
+        System.out.print("Milieu: ");
         int milieu = inputInt();
-        System.out.println("Categorie: ");
+        System.out.print("Categorie: ");
         String categorie = input.next();
+
         Onderdeel nieuw = new Onderdeel(naam, prijs, milieu, categorie);
 
-        clearConsole();
-        scheepsbouwerUI();
+        System.out.println(nieuw.printOnderdeel() + "\nHet onderdeel is toegevoegd, toets 1 om door te gaan");
+        input.next();
     }
 
     // Methode voor een klant om een nieuw project op te stellen.
@@ -513,7 +520,7 @@ public class UI {
                 case 2: clearConsole(); scheepsbouwerOfferteLijst();
                 break;
     
-                case 3: clearConsole(); scheepsbouwerNieuweKlant();
+                case 3: clearConsole(); scheepsbouwerNieuweBoot();
                 break;
     
                 case 4: clearConsole(); scheepsbouwerOnderdeel();
