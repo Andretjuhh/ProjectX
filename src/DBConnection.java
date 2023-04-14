@@ -9,6 +9,7 @@ public class DBConnection {
     private static ArrayList<Overheid> lijstVanOverheid;
     private static ArrayList<Particulier> lijstvanParticulieren;
     private static ArrayList<Boot> lijstvanBoten;
+    private static ArrayList<Scheepsbouwer> lijsvanScheepsbouwers;
 
 
     public static ArrayList<Onderdeel> getOnderdelen(){
@@ -571,6 +572,7 @@ public static void particulierToevoegen(Particulier particulier) {
 
 //--------------------------------------------------------------------------------------------------------------------------------
 
+
 public static ArrayList<Boot> getBoot(){
    Connection con = null;
    Statement stmt = null;
@@ -684,6 +686,120 @@ public static void bootToevoegen(Boot boot) {
  return lijstvanBoten;
 }
 
+//-------------------------------------------------------------------------------------------------------------------------------------
+
+public static ArrayList<Scheepsbouwer> getScheepsbouwer(){
+   Connection con = null;
+   Statement stmt = null;
+   ResultSet rs = null;
+   maakOnderdelenLijst();
+
+   try {
+       // Establish connection to MySQL database
+       Class.forName("com.mysql.jdbc.Driver");
+       con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
+
+       // Query database for boat parts
+       stmt = con.createStatement();
+       rs = stmt.executeQuery("SELECT voornaam, achternaam, email FROM scheepsbouwer");
+
+       while (rs.next()) {
+          // Fetch data from result set
+          String voornaam = rs.getString("voornaam");
+          String achternaam = rs.getString("voornaam");
+          String email = rs.getString("email");
+
+          Scheepsbouwer scheepsbouwer = new Scheepsbouwer(email, voornaam, achternaam);
+          lijsvanScheepsbouwers.add(scheepsbouwer);
+       }
+   }
+   catch (ClassNotFoundException | SQLException e) {
+       e.printStackTrace();
+    } finally {
+       try {
+          if (rs != null) rs.close();
+          if (stmt != null) stmt.close();
+          if (con != null) con.close();
+       } catch (SQLException e) {
+          e.printStackTrace();
+       }
+   }
+
+
+   return lijsvanScheepsbouwers;
+
+  
+}
+
+public static void scheepsbouwerToevoegen(Scheepsbouwer scheepsbouwer) {
+   Connection con = null;
+   PreparedStatement stmt = null;
+   
+   try {
+       // Establish connection to MySQL database
+       Class.forName("com.mysql.jdbc.Driver");
+       con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
+
+       // Insert new boat part into database
+       String query = "INSERT INTO particulier (voornaam, achternaam, email) VALUES (?, ?, ?)";
+       stmt = con.prepareStatement(query);
+       stmt.setString(1, scheepsbouwer.getVoornaam());
+       stmt.setString(2, scheepsbouwer.getAchternaam());
+       stmt.setString(4, scheepsbouwer.getEmail());
+       stmt.executeUpdate();
+
+       System.out.println("Scheepsbouwer is toegevoegd.");
+
+    } catch (ClassNotFoundException | SQLException e) {
+       e.printStackTrace();
+    } finally {
+       try {
+          if (stmt != null) stmt.close();
+          if (con != null) con.close();
+       } catch (SQLException e) {
+          e.printStackTrace();
+       }
+    }
+ }
+
+ public static ArrayList<Scheepsbouwer> zoekInScheepsbouwers(String optie) {
+   Connection con = null;
+   PreparedStatement stmt = null;
+   ResultSet rs = null;
+   maakOnderdelenLijst();
+
+   
+   try {
+    // Establish connection to MySQL database
+    Class.forName("com.mysql.jdbc.Driver");
+    con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
+    String query = "SELECT voornaam, achternaam, email FROM particulier WHERE achternaam LIKE ?";
+    stmt = con.prepareStatement(query);
+    stmt.setString(1, "%" + optie + "%");
+    rs = stmt.executeQuery();
+
+    while (rs.next()) {
+       // Create a new BoatPart object with the values retrieved from the database
+       String voornaam = rs.getString("voornaam");
+       String achternaam = rs.getString("achternaam");
+       String email = rs.getString("email");
+       Scheepsbouwer scheepsbouwer = new Scheepsbouwer(email, voornaam, achternaam);
+       lijsvanScheepsbouwers.add(scheepsbouwer);
+    }
+ }
+ catch (ClassNotFoundException | SQLException e) {
+    e.printStackTrace();
+ } finally {
+    try {
+       if (rs != null) rs.close();
+       if (stmt != null) stmt.close();
+       if (con != null) con.close();
+    } catch (SQLException e) {
+       e.printStackTrace();
+    }
+ }
+ return lijsvanScheepsbouwers;
+}
 
 
 
