@@ -17,9 +17,6 @@ public class Onderdeel {
         allOnderdelen.add(this);
     }
 
-    public Onderdeel(String navigatie, double prijs) {
-    }
-
     public void setNaam(String naam) {
         this.naam = naam;
     }
