@@ -216,7 +216,7 @@ public class UI {
         System.out.print("Voer de datum in: ");
         String datum = input.next();
 
-        Boot nieuweBoot = new Boot(boot.getGrootte(), boot.getPrijsM2(), navigatie, motor, roer, tank);
+        Boot nieuweBoot = new Boot(boot.getGrootte(), boot.getPrijs(), navigatie, motor, roer, tank);
         nieuweBoot.setExtraOpties(extra);
         Offerte nieuweOfferte = new Offerte(datum, klant, actieveScheepsbouwer, nieuweBoot);
         actieveScheepsbouwer.addOfferte(nieuweOfferte);
@@ -337,7 +337,7 @@ public class UI {
         System.out.print("Voer de datum in: ");
         String datum = input.next();
 
-        Boot nieuweBoot = new Boot(boot.getGrootte(), boot.getPrijsM2(), navigatie, motor, roer, tank);
+        Boot nieuweBoot = new Boot(boot.getGrootte(), boot.getPrijs(), navigatie, motor, roer, tank);
         nieuweBoot.setExtraOpties(extra);
         Offerte nieuweOfferte = new Offerte(datum, actieveKlant, bouwer, nieuweBoot);
         actieveKlant.addOfferte(nieuweOfferte);
