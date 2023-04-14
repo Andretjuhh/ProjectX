@@ -32,6 +32,7 @@ class OnderdeelTest {
         Onderdeel onderdeel = new Onderdeel("test", 100.0, 10, "navigatie");
         double expectedPrice = 90.0; // 10% discount
         double actualPrice = onderdeel.berekenPrijs();
-        assertEquals(expectedPrice, actualPrice, 0.001); // delta is the maximum delta between expected and actual for which both numbers are still considered equal
+
+        assertEquals(expectedPrice, actualPrice, 0.001);
     }
 }
