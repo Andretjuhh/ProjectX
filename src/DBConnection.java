@@ -588,11 +588,11 @@ public static ArrayList<Boot> getBoot(){
 
        while (rs.next()) {
           // Fetch data from result set
-          String bootnaam = rs.getString("bootnaam");
+          int bootID = rs.getInt("bootID");
           double grootte = rs.getDouble("grootte");
           double prijs = rs.getDouble("prijs");
 
-          Boot boot = new Boot(bootnaam, grootte, prijs);
+          Boot boot = new Boot(bootID, grootte, prijs);
           lijstvanBoten.add(boot);
        }
    }
@@ -624,11 +624,11 @@ public static void bootToevoegen(Boot boot) {
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Insert new boat part into database
-       String query = "INSERT INTO overheid (instantie, telefoon, email) VALUES (?, ?, ?)";
+       String query = "INSERT INTO boot (bootID, grootte, prijs) VALUES (?, ?, ?)";
        stmt = con.prepareStatement(query);
-       stmt.setString(1, boot.getbootNaam());
+       stmt.setInt(1, boot.getBootID());
        stmt.setDouble(2, boot.getGrootte());
-       stmt.setDouble(3, boot.getPrijs());
+       stmt.setDouble(3, boot.getPrijsM2());
        stmt.executeUpdate();
 
        System.out.println("Boot is toegevoegd.");
@@ -663,10 +663,9 @@ public static void bootToevoegen(Boot boot) {
 
     while (rs.next()) {
        // Create a new BoatPart object with the values retrieved from the database
-       String bootnaam = rs.getString("bootnaam");
        double grootte = rs.getDouble("grootte");
        double prijs = rs.getDouble("prijs");
-       Boot boot = new Boot(bootnaam, grootte, prijs);
+       Boot boot = new Boot(grootte, prijs);
        lijstvanBoten.add(boot);
     }
  }

@@ -8,6 +8,7 @@ public class UI {
 
     // Methode om het programma te starten
     static public void startUp() {
+        loadDB();
         clearConsole();
         System.out.println("Welkom bij ShipFlex, om van ons systeem gebruik te maken vragen wij u in te loggen.");
         System.out.println("Nog geen klant? Maak dan een account aan.");
@@ -87,6 +88,7 @@ public class UI {
         
         Scheepsbouwer nieuw = new Scheepsbouwer(voornaam, achternaam, email);
         actieveScheepsbouwer = nieuw;
+        DBConnection.scheepsbouwerToevoegen();
     }
 
     static private void nieuwKlant() {
@@ -121,6 +123,7 @@ public class UI {
 
         Particulier nieuw = new Particulier(email, telefoonnummer, voornaam, achternaam);
         actieveKlant = nieuw;
+        DBConnection.particulierToevoegen(nieuw);
     }
 
     static private void nieuwBedrijf(String email, int telefoonnummer) {
@@ -130,6 +133,7 @@ public class UI {
 
         Bedrijf nieuw = new Bedrijf(email, telefoonnummer, bedrijfsNaam);
         actieveKlant = nieuw;
+        DBConnection.getBedrijven();
     }
 
     static private void nieuwOverheid(String email, int telefoonnummer) {
@@ -139,6 +143,7 @@ public class UI {
 
         Overheid nieuw = new Overheid(email, telefoonnummer, instantie);
         actieveKlant = nieuw;
+        DBConnection.instantieToevoegen(nieuw);
     }
 
     // Methode voor een scheepsbouwer om een nieuwe offerte op te stellen.
@@ -263,7 +268,7 @@ public class UI {
         System.out.print("Voer de datum in: (dd-mm-yyyy)");
         String datum = input.next();
 
-        Boot nieuweBoot = new Boot(boot.getGrootte(), boot.getPrijs(), navigatie, motor, roer, tank);
+        Boot nieuweBoot = new Boot(boot.getGrootte(), boot.getPrijsM2(), navigatie, motor, roer, tank);
         nieuweBoot.setExtraOpties(extra);
         Offerte nieuweOfferte = new Offerte(datum, klant, actieveScheepsbouwer, nieuweBoot);
         System.out.print(nieuweOfferte.print() + "\nType 1 om door te gaan:");
@@ -307,6 +312,7 @@ public class UI {
         double prijsM2 = inputDouble();
 
         Boot nBoot = new Boot(grootte, prijsM2);
+        DBConnection.bootToevoegen(nBoot);
     }
 
     // Methode voor een scheepsbouwer om een nieuwe onderdeel toe te voegen.
@@ -464,7 +470,7 @@ public class UI {
         System.out.print("Voer de datum in: (dd-mm-yyyy)");
         String datum = input.next();
 
-        Boot nieuweBoot = new Boot(boot.getGrootte(), boot.getPrijs(), navigatie, motor, roer, tank);
+        Boot nieuweBoot = new Boot(boot.getGrootte(), boot.getPrijsM2(), navigatie, motor, roer, tank);
         nieuweBoot.setExtraOpties(extra);
         Offerte nieuweOfferte = new Offerte(datum, actieveKlant, scheepsbouwer, nieuweBoot);
         System.out.print(nieuweOfferte.print() + "\nType 1 om door te gaan:");
@@ -540,6 +546,14 @@ public class UI {
         System.out.println("Bedankt voor het gebruik maken van ShipFlex!");
         input.close();
         System.exit(1);
+    }
+
+    static private void loadDB() {
+        DBConnection.getOnderdelen();
+        DBConnection.getBoot();
+        DBConnection.getBedrijven();
+        DBConnection.getOverheid();
+        DBConnection.getParticulier();
     }
     
     // Keuze UI voor klanten.
