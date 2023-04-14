@@ -54,7 +54,7 @@ public abstract class Klant {
     
     // Korting functie
     static public double berekenKorting(int korting) {
-        return (double)korting / 100;
+        return (double)(1 - korting / 100);
     }
 
     public abstract double berekenKorting();

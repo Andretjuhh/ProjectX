@@ -63,9 +63,13 @@ public class UI {
         if(keuze == 1) {
             clearConsole();
             nieuwScheepsbouwer();
+            clearConsole();
+            scheepsbouwerUI();
         } else if(keuze == 2) {
             clearConsole();
             nieuwKlant();
+            clearConsole();
+            klantUI();
         } else {
             buitenBereik();
             aanmelden();
@@ -83,9 +87,6 @@ public class UI {
         
         Scheepsbouwer nieuw = new Scheepsbouwer(voornaam, achternaam, email);
         actieveScheepsbouwer = nieuw;
-        
-        clearConsole();
-        scheepsbouwerUI();
     }
 
     static private void nieuwKlant() {
@@ -120,9 +121,6 @@ public class UI {
 
         Particulier nieuw = new Particulier(email, telefoonnummer, voornaam, achternaam);
         actieveKlant = nieuw;
-
-        clearConsole();
-        klantUI();
     }
 
     static private void nieuwBedrijf(String email, int telefoonnummer) {
@@ -132,9 +130,6 @@ public class UI {
 
         Bedrijf nieuw = new Bedrijf(email, telefoonnummer, bedrijfsNaam);
         actieveKlant = nieuw;
-
-        clearConsole();
-        klantUI();
     }
 
     static private void nieuwOverheid(String email, int telefoonnummer) {
@@ -144,112 +139,168 @@ public class UI {
 
         Overheid nieuw = new Overheid(email, telefoonnummer, instantie);
         actieveKlant = nieuw;
-
-        clearConsole();
-        klantUI();
     }
 
     // Methode voor een scheepsbouwer om een nieuwe offerte op te stellen.
     static private void scheepsbouwerNieuweOfferte() {
         System.out.println("Voor welke klant maakt u een offerte aan");
         for(Klant klant : Klant.getAllKlanten()) {
-            System.out.println("Klant: " + klant.getEmail());
+            System.out.println(Klant.getAllKlanten().indexOf(klant) + 1 + ": Klant: " + klant.getEmail());
         }
-        System.out.print("Voer hier het nummer in van de klant voor wie u een offerte aanmaakt: ");
-        int keuze = inputInt();
-        Klant klant = Klant.getAllKlanten().get(keuze);
+        System.out.println("Voer hier het nummer in van de klant voor wie u een offerte aanmaakt: (Voor een nieuwe klant toets 0)");
+        
+        // Probeer om de gekregen input te selecteren in de lijst, lukt dit niet dan wordt het doorgegeven en moet de scheepsbouwer opnieuw proberen
+        int keuze = inputInt(0, Klant.getAllKlanten().size()) - 1;
+        Klant klant = null;
+        if(keuze == -1) {
+            nieuwKlant();
+            klant = actieveKlant;
+        } else {
+            try {
+                klant = Klant.getAllKlanten().get(keuze);
+            } catch (IndexOutOfBoundsException e) {
+                buitenBereik(); scheepsbouwerNieuweOfferte();
+            }
+        }
 
-        System.out.println("U kunt kiezen uit de volgende boten:");
+        System.out.println("\nU kunt kiezen uit de volgende boten:");
         for(Boot boot : Boot.getBootIDs()) {
-            System.out.println(boot.printBoot());
+            System.out.println(Boot.getBootIDs().indexOf(boot) + 1 + ": " + boot.printBoot());
         }
         System.out.print("Voer hier het nummer van de boot in die u wilt: ");
-        keuze = inputInt();
-        Boot boot = Boot.getBootIDs().get(keuze);
+        keuze = inputInt(1, Boot.getBootIDs().size()) - 1;
+        Boot boot = null;
+        try {
+            boot = Boot.getBootIDs().get(keuze);
+        } catch (IndexOutOfBoundsException e) {
+            buitenBereik(); scheepsbouwerNieuweOfferte();
+        }
 
-        System.out.println("Kies uw navigatie");
+        System.out.println("\nKies uw navigatie");
         for(Onderdeel onderdeel : Onderdeel.getAllOnderdelenCategorie("navigatie")) {
-            System.out.println(onderdeel.printOnderdeel());
+            System.out.println(
+                Onderdeel.getAllOnderdelenCategorie("navigatie").indexOf(onderdeel) + 1 + ": " + onderdeel.printOnderdeel()
+                );
         }
         System.out.print("Voer hier het nummer in van de navigatie die u wilt hebben: ");
-        keuze = inputInt();
-        Onderdeel navigatie = Onderdeel.getAllOnderdelenCategorie("navigatie").get(keuze - 1);
+        keuze = inputInt(1, Onderdeel.getAllOnderdelenCategorie("navigatie").size());
+        Onderdeel navigatie = null;
+        try {
+            navigatie = Onderdeel.getAllOnderdelenCategorie("navigatie").get(keuze - 1);
+        } catch (IndexOutOfBoundsException e) {
+            buitenBereik(); scheepsbouwerNieuweOfferte();
+        }
 
-        System.out.println("Kies uw motor:");
+        System.out.println("\nKies uw motor:");
         for(Onderdeel onderdeel : Onderdeel.getAllOnderdelenCategorie("motor")) {
-            System.out.println(onderdeel.printOnderdeel());
+            System.out.println(
+                Onderdeel.getAllOnderdelenCategorie("motor").indexOf(onderdeel) + 1 + ": " + onderdeel.printOnderdeel()
+                );
         }
         System.out.print("Voer hier het nummer in van de motor die u wilt hebben: ");
-        keuze = inputInt();
-        Onderdeel motor = Onderdeel.getAllOnderdelenCategorie("motor").get(keuze - 1);
+        keuze = inputInt(1, Onderdeel.getAllOnderdelenCategorie("motor").size());
+        Onderdeel motor = null;
+        try {
+            motor = Onderdeel.getAllOnderdelenCategorie("motor").get(keuze - 1);
+        } catch (IndexOutOfBoundsException e) {
+            buitenBereik(); scheepsbouwerNieuweOfferte();
+        }
         
-        System.out.println("Kies uw roer:");
+        System.out.println("\nKies uw roer:");
         for(Onderdeel onderdeel : Onderdeel.getAllOnderdelenCategorie("roer")) {
-            System.out.println(onderdeel.printOnderdeel());
+            System.out.println(
+                Onderdeel.getAllOnderdelenCategorie("roer").indexOf(onderdeel) + 1 + ": " + onderdeel.printOnderdeel()
+                );
         }
         System.out.print("Voer hier het nummer in van het roer die u wilt hebben: ");
-        keuze = inputInt();
-        Onderdeel roer = Onderdeel.getAllOnderdelenCategorie("roer").get(keuze - 1);
+        keuze = inputInt(1, Onderdeel.getAllOnderdelenCategorie("roer").size());
+        Onderdeel roer = null;
+        try {
+            roer = Onderdeel.getAllOnderdelenCategorie("roer").get(keuze - 1);
+        } catch (IndexOutOfBoundsException e) {
+            buitenBereik(); scheepsbouwerNieuweOfferte();
+        }
 
-        System.out.println("Kies uw tank:");
+        System.out.println("\nKies uw tank:");
         for(Onderdeel onderdeel : Onderdeel.getAllOnderdelenCategorie("tank")) {
-            System.out.println(onderdeel.printOnderdeel());
+            System.out.println(
+                Onderdeel.getAllOnderdelenCategorie("tank").indexOf(onderdeel) + 1 + ": " + onderdeel.printOnderdeel()
+                );
         }
         System.out.print("Voer hier het nummer in van de tank die u wilt hebben: ");
-        keuze = inputInt();
-        Onderdeel tank = Onderdeel.getAllOnderdelenCategorie("tank").get(keuze - 1);
-
-        System.out.println("Kies uw overige onderdelen:");
-        for(Onderdeel onderdeel : Onderdeel.getAllOnderdelenCategorie("overig")) {
-            System.out.println(onderdeel.printOnderdeel());
+        keuze = inputInt(1, Onderdeel.getAllOnderdelenCategorie("tank").size());
+        Onderdeel tank = null;
+        try {
+            tank = Onderdeel.getAllOnderdelenCategorie("tank").get(keuze - 1);
+        } catch(IndexOutOfBoundsException e) {
+            buitenBereik(); scheepsbouwerNieuweOfferte();
         }
 
         ArrayList<Onderdeel> extra = new ArrayList<Onderdeel>();
         while(keuze != 0) {
+            System.out.println("\nKies uw overige onderdelen:");
+            for(Onderdeel onderdeel : Onderdeel.getAllOnderdelenCategorie("overig")) {
+                System.out.println(
+                    Onderdeel.getAllOnderdelenCategorie("overig").indexOf(onderdeel) + 1 + ": " + onderdeel.printOnderdeel()
+                    );
+            }
+
             System.out.println("Voer hier het nummer in van het onderdeel dat u wilt hebben, toets 0 in als u door wilt gaan: ");
-            keuze = inputInt();
-            if(keuze != 0) {
-                extra.add(Onderdeel.getAllOnderdelenCategorie("overig").get(keuze - 1));
+            keuze = inputInt(0, Onderdeel.getAllOnderdelenCategorie("overig").size());
+            if(keuze != -1 && keuze != 0) {
+                try {
+                    extra.add(Onderdeel.getAllOnderdelenCategorie("overig").get(keuze - 1));
+                    System.out.println("Uw huidige extra opties zijn:");
+                    for(Onderdeel onderdeel : extra) {
+                        System.out.println(onderdeel.printOnderdeel());
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    buitenBereik(); scheepsbouwerNieuweOfferte();
+                }
             }
         }
 
-        System.out.print("Voer de datum in: ");
+        System.out.print("Voer de datum in: (dd-mm-yyyy)");
         String datum = input.next();
 
         Boot nieuweBoot = new Boot(boot.getGrootte(), boot.getPrijsM2(), navigatie, motor, roer, tank);
         nieuweBoot.setExtraOpties(extra);
         Offerte nieuweOfferte = new Offerte(datum, klant, actieveScheepsbouwer, nieuweBoot);
         actieveScheepsbouwer.addOfferte(nieuweOfferte);
-
-        clearConsole();
-        scheepsbouwerUI();
+        System.out.print(nieuweOfferte.print() + "\nType 1 om door te gaan:");
+        input.next();
     }
 
     // Methode voor een scheepsbouwer om een lijst van al zijn offertes te zien.
     static private void scheepsbouwerOfferteLijst() {
+        if(actieveScheepsbouwer.getOffertes().isEmpty()) {
+            System.out.println("U heeft nog geen offertes, toets 1 om teruggestuurd te worden");
+            input.next();
+            return;
+        }
+
         System.out.println("U heeft de volgende offertes:");
         
-        for(Offerte offerte : actieveKlant.getOffertes()) {
+        for(Offerte offerte : actieveScheepsbouwer.getOffertes()) {
             System.out.println(offerte.printHead());
         }
 
-        System.out.println("Om een offerte te openen kunt u het offertenummer nu intoetsen:");
+
+        System.out.println("Om een offerte te openen kunt u het offertenummer nu intoetsen: (toets daarna 1 om door te gaan)");
         System.out.print("Offertenummer: ");
         int offerteNummer = inputInt();
 
-        for(Offerte offerte : actieveKlant.getOffertes()) {
+        for(Offerte offerte : actieveScheepsbouwer.getOffertes()) {
             if(offerte.getOfferteNummer() == offerteNummer) {
-                offerte.print();
+                System.out.print(offerte.print());
             }
         }
 
         input.next();
-        clearConsole();
-        scheepsbouwerUI();
     }
 
     // Methode voor een scheepsbouwer om een nieuw type klant toe te voegen.
-    static private void scheepsbouwerKlantType() {
+    static private void scheepsbouwerNieuweKlant() {
         System.out.println("TBI");
     }
 
@@ -331,6 +382,9 @@ public class UI {
             keuze = inputInt();
             if(keuze != 0) {
                 extra.add(Onderdeel.getAllOnderdelenCategorie("overig").get(keuze - 1));
+                for(Onderdeel onderdeel : extra) {
+                    System.out.println(onderdeel.printOnderdeel());
+                }
             }
         }
 
@@ -384,6 +438,14 @@ public class UI {
         } return -1;
     }
 
+    static private int inputInt(int min, int max) {
+        int i = inputInt();
+        if(min <= i && i <= max) {
+            return i;
+        }
+        return -1;
+    }
+
     static private double inputDouble() {
         if(input.hasNextDouble()) {
             return input.nextDouble();
@@ -406,53 +468,63 @@ public class UI {
     
     // Keuze UI voor klanten.
     static private void klantUI() {
-        System.out.println("U bent ingelogd als " + actieveKlant.getEmail() + ", kies uit de volgende opties:");
-        System.out.println("1: Nieuw project aanmaken");
-        System.out.println("2: Mijn offertes");
-        System.out.println("0: Programma afsluiten");
+        int keuze = -1;
+        while(keuze != 0) {
+            System.out.println("U bent ingelogd als " + actieveKlant.getEmail() + ", kies uit de volgende opties:");
+            System.out.println("1: Nieuw project aanmaken");
+            System.out.println("2: Mijn offertes");
+            System.out.println("0: Programma afsluiten");
 
-        int keuze = inputInt();
-        switch(keuze) {
-            case 1: clearConsole(); klantNieuwProject();
-            break;
+            keuze = inputInt();
 
-            case 2: clearConsole(); klantOfferteLijst();
-            break;
+            switch(keuze) {
+                case 1: clearConsole(); klantNieuwProject();
+                break;
+    
+                case 2: clearConsole(); klantOfferteLijst();
+                break;
 
-            case 0: clearConsole(); shutdown();
-            break;
-
-            default: buitenBereik(); klantUI();
+                case 0: clearConsole(); shutdown();
+                break;
+    
+                default: buitenBereik(); klantUI();
+            }
+            clearConsole();
         }
     }
 
     // Keuze menu voor scheepsbouwers.
     static private void scheepsbouwerUI() {
-        System.out.println("U bent ingelogd als " + actieveScheepsbouwer.getEmail() + ", kies uit de volgende opties:");
-        System.out.println("1: Nieuwe offerte opstellen");
-        System.out.println("2: Lijst van offertes tonen");
-        System.out.println("3: Nieuwe klanttype toevoegen");
-        System.out.println("4: Nieuwe optie toevoegen ");
-        System.out.println("0: Programma afsluiten");
+        int keuze = -1;
+        
+        while(keuze != 0) {
+            System.out.println("U bent ingelogd als " + actieveScheepsbouwer.getEmail() + ", kies uit de volgende opties:");
+            System.out.println("1: Nieuwe offerte opstellen");
+            System.out.println("2: Lijst van offertes tonen");
+            System.out.println("3: Nieuwe boot toevoegen");
+            System.out.println("4: Nieuw onderdeel toevoegen ");
+            System.out.println("0: Programma afsluiten");
 
-        int keuze = inputInt();
-        switch(keuze) {
-            case 1: clearConsole(); scheepsbouwerNieuweOfferte();
-            break;
+            keuze = inputInt();
+            switch(keuze) {
+                case 1: clearConsole(); scheepsbouwerNieuweOfferte();
+                break;
+    
+                case 2: clearConsole(); scheepsbouwerOfferteLijst();
+                break;
+    
+                case 3: clearConsole(); scheepsbouwerNieuweKlant();
+                break;
+    
+                case 4: clearConsole(); scheepsbouwerOnderdeel();
+                break;
+    
+                case 0: clearConsole(); shutdown();
+                break;
 
-            case 2: clearConsole(); scheepsbouwerOfferteLijst();
-            break;
-
-            case 3: clearConsole(); scheepsbouwerKlantType();
-            break;
-
-            case 4: clearConsole(); scheepsbouwerOnderdeel();
-            break;
-
-            case 0: clearConsole(); shutdown();
-            break;
-
-            default: buitenBereik(); scheepsbouwerUI();
+                default: buitenBereik(); scheepsbouwerUI();
+            }
+            clearConsole();
         }
     }
 }

@@ -63,9 +63,20 @@ public class Onderdeel {
 
     public String printOnderdeel() {
         String prijsInDouble = String.format("%.2f", getPrijs());
-        String s = "Onderdeel " + getNaam() + " kost €" + prijsInDouble + " en hierop zit " + getMillieuvriendelijk()
+        String s = "Onderdeel " + getNaam() + " kost: " + prijsInDouble + " euro en hierop zit " + getMillieuvriendelijk()
                 + "% korting.\n";
         
         return s;
+    }
+
+    public boolean isMilieuVriendelijk() {
+        return millieuvriendelijk != 0;
+    }
+
+    public double berekenPrijs() {
+        if(isMilieuVriendelijk()) {
+            return prijs * (1 - (double)(millieuvriendelijk / 100));
+        }
+        return prijs;
     }
 }

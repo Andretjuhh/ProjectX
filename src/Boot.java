@@ -8,8 +8,23 @@ class Boot {
     private Onderdeel motor;
     private Onderdeel roer;
     private Onderdeel tank;
-    private static ArrayList<Boot> bootIDs = new ArrayList<>();
-    private ArrayList<Onderdeel> extraOpties = new ArrayList<>();
+    private static ArrayList<Boot> bootIDs = new ArrayList<Boot>();
+    private ArrayList<Onderdeel> extraOpties = new ArrayList<Onderdeel>();
+
+    public Boot(double grootte, double prijsM2) {
+        this.grootte = grootte;
+        this.prijsM2 = prijsM2;
+
+        this.bootID = ((int) (Math.random() * 100000));
+
+        for (Boot b : bootIDs) {
+            if (b.getBootID() == bootID) {
+                this.bootID = ((int) (Math.random() * 100000));
+            }
+        }
+
+        bootIDs.add(this);
+    }
 
     public Boot(double grootte, double prijsM2, Onderdeel navigatie, Onderdeel motor, Onderdeel roer, Onderdeel tank) {
         this.grootte = grootte;
@@ -26,7 +41,6 @@ class Boot {
                 this.bootID = ((int) (Math.random() * 100000));
             }
         }
-        bootIDs.add(this);
     }
 
     public int getBootID() {
@@ -133,7 +147,7 @@ class Boot {
         result += roer.printOnderdeel();
         result += tank.printOnderdeel();
 
-        for(Onderdeel onderdeel : extraOpties) {onderdeel.printOnderdeel();}
+        for(Onderdeel onderdeel : extraOpties) {result += onderdeel.printOnderdeel();}
 
         return result;
     }
