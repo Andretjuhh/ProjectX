@@ -13,6 +13,8 @@ public class Main {
         Onderdeel tank = new Onderdeel("tank 1", 1, 0, "tank");
         Onderdeel roer = new Onderdeel("roer 1", 1, 0, "roer");
         Onderdeel extra1 = new Onderdeel("koffie 1", 1, 0, "overig");
+        Boot nBoot = new Boot(boot.getGrootte(), boot.getPrijsM2(), nav, motor, roer, tank);
+        Offerte nOfferte = new Offerte("10-4", overheid, sb, nBoot);
 
         UI.startUp();
         }

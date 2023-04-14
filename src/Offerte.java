@@ -14,6 +14,8 @@ public class Offerte {
         this.klant = klant;
         this.scheepsbouwer = scheepsbouwer;
         this.boot = boot;
+        klant.addOfferte(this);
+        scheepsbouwer.addOfferte(this);
         status = statussen[0];
     }
 

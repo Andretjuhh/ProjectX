@@ -402,9 +402,6 @@ public class UI {
         nieuweBoot.setExtraOpties(extra);
         Offerte nieuweOfferte = new Offerte(datum, actieveKlant, bouwer, nieuweBoot);
         actieveKlant.addOfferte(nieuweOfferte);
-
-        clearConsole();
-        klantUI();
     }
 
     // Methode voor een klant om al zijn offertes in te zien.
@@ -426,8 +423,6 @@ public class UI {
         }
 
         input.next();
-        clearConsole();
-        klantUI();
     }
 
     // Methode om de console leeg te maken.
