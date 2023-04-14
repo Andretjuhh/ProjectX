@@ -20,7 +20,7 @@ public class DBConnection {
 
         try {
             // Establish connection to MySQL database
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
    
             // Query database for boat parts
@@ -66,7 +66,7 @@ public class DBConnection {
         
         try {
             // Establish connection to MySQL database
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
    
             // Insert new boat part into database
@@ -100,7 +100,7 @@ public class DBConnection {
   
         try {
            // Establish connection to MySQL database
-           Class.forName("com.mysql.jdbc.Driver");
+           Class.forName("com.mysql.cj.jdbc.Driver");
            con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
   
            // Remove boat part from database
@@ -148,7 +148,7 @@ public class DBConnection {
         
         try {
          // Establish connection to MySQL database
-         Class.forName("com.mysql.jdbc.Driver");
+         Class.forName("com.mysql.cj.jdbc.Driver");
          con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
          String query = "SELECT Onaam, prijs, milieu, categorie FROM onderdelen WHERE Onaam LIKE ?";
          stmt = con.prepareStatement(query);
@@ -188,7 +188,7 @@ public class DBConnection {
       
       try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com", "root", "Ikspopdepl4");
        String query = "SELECT Onaam, prijs, milieu, categorie FROM onderdelen WHERE categorie = ?";
        stmt = con.prepareStatement(query);
@@ -229,7 +229,7 @@ public class DBConnection {
 
    try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Query database for boat parts
@@ -270,7 +270,7 @@ public static void bedrijfToevoegen(Bedrijf bedrijf) {
    
    try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Insert new boat part into database
@@ -304,7 +304,7 @@ public static void bedrijfToevoegen(Bedrijf bedrijf) {
    
    try {
     // Establish connection to MySQL database
-    Class.forName("com.mysql.jdbc.Driver");
+    Class.forName("com.mysql.cj.jdbc.Driver");
     con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
     String query = "SELECT Bnaam, telefoon, email FROM bedrijf WHERE Bnaam LIKE ?";
     stmt = con.prepareStatement(query);
@@ -347,7 +347,7 @@ public static ArrayList<Overheid> getOverheid(){
 
    try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Query database for boat parts
@@ -388,7 +388,7 @@ public static void instantieToevoegen(Overheid overheid) {
    
    try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Insert new boat part into database
@@ -422,7 +422,7 @@ public static void instantieToevoegen(Overheid overheid) {
    
    try {
     // Establish connection to MySQL database
-    Class.forName("com.mysql.jdbc.Driver");
+    Class.forName("com.mysql.cj.jdbc.Driver");
     con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
     String query = "SELECT instantie, telefoon, email FROM overheid WHERE instantie LIKE ?";
     stmt = con.prepareStatement(query);
@@ -462,7 +462,7 @@ public static ArrayList<Particulier> getParticulier(){
 
    try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Query database for boat parts
@@ -504,7 +504,7 @@ public static void particulierToevoegen(Particulier particulier) {
    
    try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Insert new boat part into database
@@ -539,7 +539,7 @@ public static void particulierToevoegen(Particulier particulier) {
    
    try {
     // Establish connection to MySQL database
-    Class.forName("com.mysql.jdbc.Driver");
+    Class.forName("com.mysql.cj.jdbc.Driver");
     con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
     String query = "SELECT voornaam, achternaam, telefoon, email FROM particulier WHERE achternaam LIKE ?";
     stmt = con.prepareStatement(query);
@@ -581,7 +581,7 @@ public static ArrayList<Boot> getBoot(){
 
    try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Query database for boat parts
@@ -622,7 +622,7 @@ public static void bootToevoegen(Boot boot) {
    
    try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Insert new boat part into database
@@ -656,7 +656,7 @@ public static void bootToevoegen(Boot boot) {
    
    try {
     // Establish connection to MySQL database
-    Class.forName("com.mysql.jdbc.Driver");
+    Class.forName("com.mysql.cj.jdbc.Driver");
     con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
     String query = "SELECT bootnaam, grootte, prijs FROM boot WHERE bootnaam LIKE ?";
     stmt = con.prepareStatement(query);
@@ -695,7 +695,7 @@ public static ArrayList<Scheepsbouwer> getScheepsbouwer(){
 
    try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Query database for boat parts
@@ -705,10 +705,10 @@ public static ArrayList<Scheepsbouwer> getScheepsbouwer(){
        while (rs.next()) {
           // Fetch data from result set
           String voornaam = rs.getString("voornaam");
-          String achternaam = rs.getString("voornaam");
+          String achternaam = rs.getString("achternaam");
           String email = rs.getString("email");
 
-          Scheepsbouwer scheepsbouwer = new Scheepsbouwer(email, voornaam, achternaam);
+          Scheepsbouwer scheepsbouwer = new Scheepsbouwer(voornaam, achternaam, email);
          //  lijsvanScheepsbouwers.add(scheepsbouwer);
        }
    }
@@ -736,7 +736,7 @@ public static void scheepsbouwerToevoegen(Scheepsbouwer scheepsbouwer) {
    
    try {
        // Establish connection to MySQL database
-       Class.forName("com.mysql.jdbc.Driver");
+       Class.forName("com.mysql.cj.jdbc.Driver");
        con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
 
        // Insert new boat part into database
@@ -770,7 +770,7 @@ public static void scheepsbouwerToevoegen(Scheepsbouwer scheepsbouwer) {
    
    try {
     // Establish connection to MySQL database
-    Class.forName("com.mysql.jdbc.Driver");
+    Class.forName("com.mysql.cj.jdbc.Driver");
     con = DriverManager.getConnection("jdbc:mysql://projectxsql.mysql.database.azure.com/projectx", "shipflex", "Ikspopdepl4");
     String query = "SELECT voornaam, achternaam, email FROM scheepsbouwer WHERE achternaam LIKE ?";
     stmt = con.prepareStatement(query);

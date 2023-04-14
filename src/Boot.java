@@ -30,6 +30,8 @@ class Boot {
         this.bootID = bootID;
         this.grootte = grootte;
         this.prijsM2 = prijsM2;
+
+        bootIDs.add(this);
     }
 
     public Boot(double grootte, double prijsM2, Onderdeel navigatie, Onderdeel motor, Onderdeel roer, Onderdeel tank) {
