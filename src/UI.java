@@ -266,7 +266,6 @@ public class UI {
         Boot nieuweBoot = new Boot(boot.getGrootte(), boot.getPrijsM2(), navigatie, motor, roer, tank);
         nieuweBoot.setExtraOpties(extra);
         Offerte nieuweOfferte = new Offerte(datum, klant, actieveScheepsbouwer, nieuweBoot);
-        actieveScheepsbouwer.addOfferte(nieuweOfferte);
         System.out.print(nieuweOfferte.print() + "\nType 1 om door te gaan:");
         input.next();
     }

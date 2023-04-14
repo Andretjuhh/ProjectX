@@ -76,7 +76,7 @@ public class Onderdeel {
 
     public double berekenPrijs() {
         if(isMilieuVriendelijk()) {
-            return prijs * (1 - (double)(millieuvriendelijk / 100));
+            return (prijs * (1 - ((double) millieuvriendelijk / 100)));
         }
         return prijs;
     }

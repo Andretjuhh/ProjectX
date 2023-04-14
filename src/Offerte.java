@@ -74,6 +74,6 @@ public class Offerte {
     }
 
     public double totaalPrijs() {
-        return klant.berekenKorting() * boot.berekenTotaalPrijs();
+        return (klant.berekenKorting() * boot.berekenTotaalPrijs());
     }
 }

@@ -120,12 +120,12 @@ class Boot {
 
     public double berekenTotaalPrijs() {
         double totaalPrijs = getGrootte() * getPrijsM2();
-        totaalPrijs += getNavigatie().getPrijs();
-        totaalPrijs += getMotor().getPrijs();
-        totaalPrijs += getRoer().getPrijs();
-        totaalPrijs += getTank().getPrijs();
+        totaalPrijs += getNavigatie().berekenPrijs();
+        totaalPrijs += getMotor().berekenPrijs();
+        totaalPrijs += getRoer().berekenPrijs();
+        totaalPrijs += getTank().berekenPrijs();
         for (Onderdeel o : getExtraOpties()) {
-            totaalPrijs += o.getPrijs();
+            totaalPrijs += o.berekenPrijs();
         }
         return totaalPrijs;
     }
