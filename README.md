@@ -1,5 +1,7 @@
 # School Project: ShipFlex
 
+###Important: Run the program from the terminal and not in an IDE.
+
 This project is a Java-based database application created for the course *Praktijkopdracht 1* at *The Hague University of Applied Sciences*. 
 The application aims to provide a user-friendly interface for managing data related to making an offer for a boat. 
 It uses Java programming language and MySQL as a backend database.
